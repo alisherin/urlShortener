@@ -1,4 +1,10 @@
 ``
+cp .env.example .env
+``
+
+Fill .env file
+
+``
 docker-compose up -d --build
 ``
 

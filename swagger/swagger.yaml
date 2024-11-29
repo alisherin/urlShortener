@@ -1,0 +1,32 @@
+openapi: 3.0.1
+info:
+  title: Shortener API
+  description: Shortener API
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: info@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:8095
+tags:
+  - name: Короткие ссылки
+    description: модуль Короткие ссылки
+
+paths:
+  /shortener:
+    $ref: 'shortener/entity.yaml#/index_store'
+  /shortener/{link}:
+    $ref: 'shortener/entity.yaml#/show_update_delete'
+  /stats/{link}:
+    $ref: 'shortener/entity.yaml#/stats'
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer

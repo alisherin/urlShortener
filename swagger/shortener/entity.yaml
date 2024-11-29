@@ -1,0 +1,112 @@
+index_store:
+  get:
+    tags:
+      - Короткие ссылки
+    summary: Список Коротких ссылок
+    operationId: getShortenerList
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: 'components.yaml#/schemas/Shorteners'
+  post:
+    tags:
+      - Короткие ссылки
+    summary: Добавить Короткую ссылку
+    operationId: storeShortener
+    requestBody:
+      description: Параметры для заполнения
+      required: true
+      content:
+        'application/json':
+          schema:
+            $ref: 'components.yaml#/schemas/StoreShortener'
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: 'components.yaml#/schemas/Shortener'
+show_update_delete:
+  get:
+    tags:
+      - Короткие ссылки
+    summary: Найти Короткую ссылку по ShortLink
+    description: Возвращает модель выбранной Короткой ссылки
+    operationId: getShortenerByShortLink
+    parameters:
+      - name: link
+        in: path
+        description: ShortLink Короткой ссылки
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: successful operation
+        content:
+          application/json:
+            schema:
+              $ref: 'components.yaml#/schemas/Shortener'
+      400:
+        description: Invalid ShortLink supplied
+        content: { }
+      404:
+        description: Shortener not found
+        content: { }
+  delete:
+    tags:
+      - Короткие ссылки
+    summary: Удалить Короткую ссылку по ShortLink
+    description: Удаляет выбранную Короткую ссылку
+    operationId: deleteShortenerByShortLink
+    parameters:
+      - name: link
+        in: path
+        description: ShortLink Короткой ссылки
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: successful operation
+        content:
+          application/json:
+            schema:
+              $ref: 'components.yaml#/schemas/Shortener'
+      400:
+        description: Invalid ShortLink supplied
+        content: { }
+      404:
+        description: Shortener not found
+        content: { }
+stats:
+  get:
+    tags:
+      - Короткие ссылки
+    summary: Найти Короткую ссылку по ShortLink
+    description: Возвращает модель выбранной Короткой ссылки
+    operationId: getShortenerByShortLink
+    parameters:
+      - name: link
+        in: path
+        description: ShortLink Короткой ссылки
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: successful operation
+        content:
+          application/json:
+            schema:
+              $ref: 'components.yaml#/schemas/Shortener'
+      400:
+        description: Invalid ShortLink supplied
+        content: { }
+      404:
+        description: Shortener not found
+        content: { }

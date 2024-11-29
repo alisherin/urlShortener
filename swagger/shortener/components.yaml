@@ -1,0 +1,37 @@
+schemas:
+  Shortener:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      url:
+        type: string
+      short:
+        type: string
+      userId:
+        type: integer
+      expiredAt:
+        type: string
+      counter:
+        type: integer
+        format: int64
+      lastUsedAt:
+        type: string
+  Shorteners:
+    type: array
+    items:
+      $ref: 'components.yaml#/schemas/Shortener'
+  StoreShortener:
+    properties:
+      url:
+        type: string
+        required: true
+  UpdateProductCategory:
+    properties:
+      title:
+        type: string
+        required: true
+responses:
+  UnauthorizedError:
+    description: Access token is missing or invalid

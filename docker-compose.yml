@@ -1,0 +1,40 @@
+services:
+  pgsql:
+    image: 'postgres:15'
+    env_file:
+      - .env
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    environment:
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+    volumes:
+      - 'shortener-pgsql:/var/lib/postgresql/data'
+    healthcheck:
+      test:
+        - CMD
+        - pg_isready
+        - '-q'
+        - '-d'
+        - '${DB_DATABASE}'
+        - '-U'
+        - '${DB_USERNAME}'
+      retries: 3
+      timeout: 5s
+  swagger-ui:
+    image: swaggerapi/swagger-ui:v5.18.2
+    container_name: "shortener_swagger_ui"
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - ${SWAGGER_UI_PORT:-8784}:8080
+    volumes:
+      - ./swagger:/usr/share/nginx/html/doc
+    environment:
+      API_URL: doc/swagger.yaml
+volumes:
+  shortener-pgsql:
+    driver: local
